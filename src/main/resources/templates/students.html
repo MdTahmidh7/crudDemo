@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    .row h1{
+      //color: #2aa53e;
+    }
+    .row a{
+      //color: brown;
+      //margin-right: 5rem;
+    }
+    .addButtonContainer{
+      width: 95%;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Crud Operation</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/students}">Student Management</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mt-3">Student list</h1>
+      <div class="row addButtonContainer">
+        <div class="d-flex flex-row-reverse">
+          <a th:href="@{students/new}" class="btn btn-primary btn-sm mb-3">
+          Add Students
+          </a>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th class="text-center">Students FirstName</th>
+          <th class="text-center">Students LastName</th>
+          <th class="text-center">Students Email</th>
+          <th class="text-center">Students Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr th:each="student : ${students}">
+          <td th:text="${student.firstName}"></td>
+          <td th:text="${student.lastName}"></td>
+          <td th:text="${student.email}"></td>
+          <td class="text-center">
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">
+              update
+            </a>
+            <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-danger">
+              Delete
+            </a>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</body>
+</html>
